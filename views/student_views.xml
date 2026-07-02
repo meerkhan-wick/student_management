@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="view_student_management_list" model="ir.ui.view">
+        <field name="name">student.management.list</field>
+        <field name="model">student.management</field>
+        <field name="arch" type="xml">
+            <list string="Students">
+                <field name="student_id"/>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="email"/>
+                <field name="department"/>
+                <field name="gpa"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_student_management_form" model="ir.ui.view">
+        <field name="name">student.management.form</field>
+        <field name="model">student.management</field>
+        <field name="arch" type="xml">
+            <form string="Student">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Student Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="student_id"/>
+                            <field name="age"/>
+                            <field name="department"/>
+                        </group>
+                        <group>
+                            <field name="email"/>
+                            <field name="gpa"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_student_management_search" model="ir.ui.view">
+        <field name="name">student.management.search</field>
+        <field name="model">student.management</field>
+        <field name="arch" type="xml">
+            <search string="Search Students">
+                <field name="name"/>
+                <field name="student_id"/>
+                <field name="email"/>
+                <field name="department"/>
+                <filter string="Department" name="group_department" context="{'group_by': 'department'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_student_management" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">student.management</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_student_management_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first student record
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_student_management_root" name="Student Management" sequence="10"/>
+    <menuitem id="menu_student_management_main"
+              name="Students"
+              parent="menu_student_management_root"
+              action="action_student_management"
+              sequence="10"/>
+
+</odoo>
